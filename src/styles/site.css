@@ -126,8 +126,10 @@ figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; line-height:
 .item-row { display: grid; grid-template-columns: 260px 1fr; gap: 30px; align-items: center; padding: 22px 0; border-top: 1px solid #ddd; }
 .item-row:first-of-type { border-top: 0; }
 .item-row h2 { margin: 0 0 8px; }
-.sensor-pics { display: flex; gap: 10px; align-items: end; }
-.sensor-pics img { height: 180px; width: auto; }
+/* Motion sensors: the two MTx photos side by side need about 330px, so this column is wider */
+.item-row.sensor { grid-template-columns: 340px 1fr; }
+.sensor-pics { display: flex; gap: 10px; align-items: flex-start; }
+.sensor-pics img { height: 180px; width: auto; min-width: 0; object-fit: contain; }
 
 /* ---------- presentations / publications (sheets) ---------- */
 .diss .group { font: 700 20px/1.4 var(--serif); border-bottom: 1px solid #d8d5dd; padding-bottom: 4px; margin: 30px 0 12px; }
@@ -192,6 +194,6 @@ html:has(.lb[open]) { overflow: hidden; }
   .menu .sub { display: block; position: static; transform: none; background: rgba(0, 0, 0, .15); text-align: center; }
   .page { padding-top: 32px; }
   .title { font-size: 32px; }
-  .home-intro, .home-boxes, .cols, .cols.three, .cols.side, .item-row, .mailform .two { grid-template-columns: 1fr; }
+  .home-intro, .home-boxes, .cols, .cols.three, .cols.side, .item-row, .item-row.sensor, .mailform .two { grid-template-columns: 1fr; }
   .lb { padding: 50px 0; }
 }
