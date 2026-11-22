@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { SHEETS, load, lecturesHtml } from '../lib/dissemination.js';
+import csv from '../data/MPM_lectures.csv?raw';
+const html = lecturesHtml(await load(SHEETS.lectures, csv));
+---
+<Base title="Presentations & Workshops" path="/presentations" description="Talks, demonstrations and workshops with the Music Paint Machine since 2010.">
+  <section class="page diss">
+    <div class="wrap text">
+      <h1 class="title">Presentations &amp; Workshops</h1>
+      <div id="lectures" set:html={html} />
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Read the sheet again in the browser, so a new row shows straight away.
+  import { SHEETS, parseCSV, lecturesHtml } from '../lib/dissemination.js';
+  (async () => {
+    if (!SHEETS.lectures) return;
+    try {
+      const r = await fetch(SHEETS.lectures, { cache: 'no-store' });
+      if (r.ok) document.getElementById('lectures').innerHTML = lecturesHtml(parseCSV(await r.text()));
+    } catch {}
+  })();
+</script>

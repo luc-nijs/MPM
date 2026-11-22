@@ -1,0 +1,8 @@
+---
+// Buttons to move between Development and its three subpages.
+const { path } = Astro.props;
+const links = [['/development/', 'Development'], ['/mat/', 'Mat'], ['/motion-sensors/', 'Motion sensors'], ['/interface/', 'Interface']];
+---
+<nav class="subnav" aria-label="Development">
+  {links.map(([h, l]) => <a href={h} aria-current={h === `${path}/` ? 'page' : undefined}>{l}</a>)}
+</nav>

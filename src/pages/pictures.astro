@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+// The 16 photos of the Weebly slideshow, in its order.
+const files = ['01.png', '02.png', '03.png', '04.jpg', '05.png', '06.jpg', '07.png', '08.jpg', '09.png', '10.png',
+  '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpg', '16.jpg'];
+---
+<Base title="Pictures" path="/pictures">
+  <section class="page">
+    <div class="wrap">
+      <h1 class="title">Pictures</h1>
+      <div class="gallery">
+        {files.map((f, i) => (
+          <a href={`/images/pictures/${f}`} data-i={i}><img src={`/images/pictures/${f}`} alt={`Music Paint Machine, picture ${i + 1}`} loading="lazy" /></a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <dialog class="lb" aria-label="Picture">
+    <img alt="" />
+    <button class="x" type="button" aria-label="Close">×</button>
+    <button class="prev" type="button" aria-label="Previous">‹</button>
+    <button class="next" type="button" aria-label="Next">›</button>
+  </dialog>
+  <script is:inline>
+    (function () {
+      var links = [].slice.call(document.querySelectorAll('.gallery a'));
+      var lb = document.querySelector('.lb'), img = lb.querySelector('img'), at = 0;
+      function show(i) { at = (i + links.length) % links.length; img.src = links[at].href; img.alt = links[at].querySelector('img').alt; }
+      links.forEach(function (a, i) { a.addEventListener('click', function (e) { e.preventDefault(); show(i); lb.showModal(); }); });
+      lb.querySelector('.x').onclick = function () { lb.close(); };
+      lb.querySelector('.prev').onclick = function () { show(at - 1); };
+      lb.querySelector('.next').onclick = function () { show(at + 1); };
+      lb.addEventListener('click', function (e) { if (e.target === lb) lb.close(); });
+      document.addEventListener('keydown', function (e) {
+        if (!lb.open) return;
+        if (e.key === 'ArrowLeft') show(at - 1);
+        if (e.key === 'ArrowRight') show(at + 1);
+      });
+    })();
+  </script>
+</Base>

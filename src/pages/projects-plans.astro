@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+const projects = [
+  ['MPM_P8 (2015-2016)', 'Connecting the MPM to the Dalcroze Method.'],
+  ['MPM_P7 (2014-2015)', 'A study that will be conducted as part of the course in Systematic Musicology. In this study students will explore the effect of different kinds of visual feedback on the mechanism of prediction error.'],
+  ['MPM_P6 (2013)', 'A project with pre-service teachers, as their graduation project (see <a href="http://musicpaint.weebly.com/index.html" target="_blank" rel="noopener">here</a>).'],
+  ['MPM_P5 (2012)', 'An exploratory study with three flute teachers, who designed a workshop with the system.<br />Data are being processed.'],
+  ['MPM_P4 (2012)', 'A longitudinal study with 12 children learning to play the clarinet.<br />ref: Nijs, 2013, 2014'],
+  ['MPM_P3 (2011)', 'A try-out with 2 trumpet players. During several sessions, one player was free to explore the system, the other had different tasks.'],
+  ['MPM_P2 (2011)', 'A second test on user experience, with the second proto-type.<br />ref: Nijs, 2012a, 2012b'],
+  ['MPM_P1 (2010)', 'A first test on user experience, with the first proto-type.'],
+];
+---
+<Base title="Projects & Plans" path="/projects-plans">
+  <section class="page">
+    <div class="wrap text">
+      <h1 class="title">Projects &amp; Plans</h1>
+      <p class="lead">The Music Paint Machine was designed, developed and used (experiments, teaching) during my PhD project (see <a href="/phd-synopsis/">here</a>).<br />Below, all experiments/studies are listed:</p>
+      {projects.map(([h, t]) => (<><h2>{h}</h2><p set:html={t} /></>))}
+    </div>
+  </section>
+</Base>

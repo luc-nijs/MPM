@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+// The videos shown on the Weebly page (the first four used the old Flash player there).
+const videos = [
+  { yt: 'UAM2y1SOsIs', cap: 'Riverdancing Violinists (Igudesman & Joo)' },
+  { yt: '1O9Ro0TaXH4', cap: 'The Igudesman & Joo UNICEF world record of the most dancing violinists' },
+  { yt: 'zikiqfifAas', cap: 'Saxophone and tap dance (Keslie Nolen)' },
+  { yt: 'dZ5sAO95KYI', cap: 'Jean-François Charles, dancing clarinetist' },
+  { yt: 'fwqDDFkOaCc', cap: 'Violin dance performance (Lindsey Stirling)' },
+  { vimeo: '125797306', cap: '<a href="https://vimeo.com/125797306" target="_blank" rel="noopener">Duet for Two Flutes</a> from <a href="https://vimeo.com/user39436336" target="_blank" rel="noopener">Dawn Pratson</a> on Vimeo' },
+  { yt: '782GpSv9pTM', cap: 'Movement and music: University of Maryland Symphony Orchestra, Prelude to the Afternoon of a Faun' },
+];
+---
+<Base title="Music Performance & Movement" path="/music-performance-movement">
+  <section class="page">
+    <div class="wrap">
+      <h1 class="title">Music Performance &amp; Movement</h1>
+      <p lang="nl">Dit zijn de video's van mijn presentatie op DKO121212.</p>
+      <p>Video Dominica Eyckmans: <a href="http://www.danceswithviola.org/" target="_blank" rel="noopener">danceswithviola.org</a></p>
+      <p>"In touch" for moving flutist and electronics: <a href="http://vimeo.com/6761185" target="_blank" rel="noopener">vimeo.com/6761185</a></p>
+      <div class="videos">
+        {videos.map((v) => (
+          <div class="video">
+            <iframe
+              src={v.yt ? `https://www.youtube-nocookie.com/embed/${v.yt}` : `https://player.vimeo.com/video/${v.vimeo}?dnt=1`}
+              title={v.cap.replace(/<[^>]+>/g, '')} loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>
+            <p set:html={v.cap} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

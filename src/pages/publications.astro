@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import { SHEETS, load, publicationsHtml, countText } from '../lib/dissemination.js';
+import csv from '../data/MPM_publications.csv?raw';
+const pubs = await load(SHEETS.publications, csv);
+---
+<Base title="Publications" path="/publications" description="Publications on the Music Paint Machine: journal articles, conference papers, book chapters and the PhD thesis.">
+  <section class="page diss">
+    <div class="wrap">
+      <h1 class="title">Publications</h1>
+      <div class="pb-controls">
+        <span><label for="pb-group">Group by</label><select id="pb-group"><option value="section">section</option><option value="year">year</option><option value="type">type</option></select></span>
+        <span><label for="pb-type">Type</label><select id="pb-type"><option value="">all</option></select></span>
+        <span><label for="pb-from">From</label><select id="pb-from"></select><label for="pb-to" class="to">to</label><select id="pb-to"></select></span>
+        <span><input type="search" id="pb-q" placeholder="author, title, journal…" size="20" aria-label="Search publications" /></span>
+        <span class="pb-count" id="pb-count">{countText(pubs)}</span>
+      </div>
+      <div class="pubs" id="publications" set:html={publicationsHtml(pubs)} />
+    </div>
+  </section>
+</Base>
+
+<script is:inline type="application/json" id="pb-data" set:html={JSON.stringify(pubs).replace(/</g, '\\u003c')}></script>
+
+<script>
+  // Read the sheet again in the browser, so changes show up straight away, and run the filters.
+  import { SHEETS, parseCSV, esc, TYPE_ORDER, TYPE_LABEL, publicationsHtml, filterPublications, countText } from '../lib/dissemination.js';
+  const $ = (id) => document.getElementById(id);
+  let pubs = JSON.parse($('pb-data').textContent);
+
+  function apply() {
+    const hit = filterPublications(pubs, {
+      type: $('pb-type').value, from: Number($('pb-from').value), to: Number($('pb-to').value), q: $('pb-q').value,
+    });
+    $('pb-count').textContent = countText(hit);
+    $('publications').innerHTML = publicationsHtml(hit, $('pb-group').value);
+  }
+
+  function controls() {
+    const keepType = $('pb-type').value;
+    const types = [...new Set(pubs.map((r) => String(r.type || '').toLowerCase()).filter(Boolean))]
+      .sort((a, b) => (TYPE_ORDER.indexOf(a) + 1 || 99) - (TYPE_ORDER.indexOf(b) + 1 || 99));
+    $('pb-type').innerHTML = '<option value="">all</option>' + types.map((t) => `<option value="${esc(t)}">${esc(TYPE_LABEL[t] || t)}</option>`).join('');
+    $('pb-type').value = types.includes(keepType) ? keepType : '';
+    const years = pubs.map((r) => parseInt(r.year, 10)).filter((y) => y > 1900);
+    const lo = Math.min(...years), hi = Math.max(...years);
+    let opts = '';
+    for (let y = hi; y >= lo; y--) opts += `<option>${y}</option>`;
+    const keepFrom = $('pb-from').value, keepTo = $('pb-to').value;
+    $('pb-from').innerHTML = opts; $('pb-to').innerHTML = opts;
+    $('pb-from').value = years.includes(Number(keepFrom)) ? keepFrom : String(lo);
+    $('pb-to').value = years.includes(Number(keepTo)) ? keepTo : String(hi);
+  }
+
+  controls();
+  for (const id of ['pb-group', 'pb-type', 'pb-from', 'pb-to']) $(id).addEventListener('change', apply);
+  $('pb-q').addEventListener('input', apply);
+
+  (async () => {
+    if (!SHEETS.publications) return;
+    try {
+      const r = await fetch(SHEETS.publications, { cache: 'no-store' });
+      if (!r.ok) return;
+      pubs = parseCSV(await r.text());
+      controls();
+      apply();
+    } catch {}
+  })();
+</script>

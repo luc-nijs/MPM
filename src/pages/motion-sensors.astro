@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import DevNav from '../components/DevNav.astro';
+---
+<Base title="Motion sensors" path="/motion-sensors">
+  <section class="page">
+    <div class="wrap">
+      <h1 class="title">Motion sensors</h1>
+      <DevNav path="/motion-sensors" />
+
+      <div class="item-row">
+        <div class="sensor-pics">
+          <img src="/images/sensor-xsens-1.jpg" alt="MTx sensor attached to the musician" width="111" height="228" />
+          <img src="/images/sensor-xsens-2.jpg" alt="MTx sensors: one on the musician (A), one on a fixed point (B)" width="230" height="178" />
+        </div>
+        <div>
+          <h2>Sensor 1 - MTx sensor</h2>
+          <p>The first prototype of the system tracked movements on the basis of two inertial MTx sensors from Xsens (see Figure 5.13a). One sensor was attached to the musician (A); another sensor was placed on a fixed point (B). Body movements were tracked by using the relative difference in orientation between both sensors.</p>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="sensor-pics"><img src="/images/sensor-firefly.jpg" alt="Sparkfun Razor 9DOF inertial sensor" width="120" height="178" /></div>
+        <div>
+          <h2>Sensor 2 - Firefly</h2>
+          <p>The second prototype tracked movements with a Sparkfun Razor 9DOF inertial sensor (http://www.sparkfun.com/products/9623). This wireless motion tracker incorporates four sensors: a single-axis gyrometer, dual-axis gyrometer, a triple-axis accelerometer and a triple-axis magnetometer, resulting in nine degrees of inertial measurement.</p>
+        </div>
+      </div>
+
+      <div class="item-row">
+        <div class="sensor-pics"><img src="/images/sensor-kinect.jpg" alt="Kinect sensor" width="121" height="162" /></div>
+        <div>
+          <h2>Sensor 3 - Kinect</h2>
+          <p>In the third prototype, movements were tracked with a Kinect® sensor. This commercially available device detects the user body position without any wearable devices or markers on the body. This enables unobtrusive body tracking but also allows the integration of functional movements, i.e. specific movements that are used to control the system. For example, raising the right arm above the head clears the screen and raising the left hand above the head brings the cursor to the left side of the screen. Furthermore the Kinect® sensor allows to delineate an area. For example, the system starts to work as soon as someone enters a part of the traceable space. In the case of the Music Paint Machine, the system says “hello”, starts tracking the music and the body movements and starts logging as soon as somebody steps on the coloured sensor mat. It says “goodbye” and stops tracking and logging when leaving the mat again. An additional benefit of defining such an area is that it avoids tracking the movements of the other learners and teacher in the classroom. This way, they cannot interfere with the interactive loop of the learner who engages with the system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

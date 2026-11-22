@@ -1,0 +1,24 @@
+---
+// Replaces the Weebly forms: it opens the visitor's email program with the message filled in.
+import { MAIL_TO } from '../data/nav.js';
+interface Props { id: string; subject?: string; button?: string }
+const { id, subject = 'via website', button = 'Submit' } = Astro.props;
+---
+<form class="mailform" id={id} data-to={MAIL_TO} data-subject={subject}>
+  <div class="two">
+    <div><label for={`${id}-first`}>First name *</label><input id={`${id}-first`} name="first" required autocomplete="given-name" /></div>
+    <div><label for={`${id}-last`}>Last name</label><input id={`${id}-last`} name="last" autocomplete="family-name" /></div>
+  </div>
+  <label for={`${id}-email`}>Email *</label><input id={`${id}-email`} name="email" type="email" required autocomplete="email" />
+  <label for={`${id}-msg`}>Comment *</label><textarea id={`${id}-msg`} name="msg" required></textarea>
+  <button class="btn" type="submit">{button}</button>
+  <p class="note">This opens your email program with the message ready to send.</p>
+</form>
+<script is:inline define:vars={{ id }}>
+  document.getElementById(id).addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, v = function (n) { return f.elements[n].value.trim(); };
+    var body = v('msg') + '\n\n' + (v('first') + ' ' + v('last')).trim() + '\n' + v('email');
+    location.href = 'mailto:' + f.dataset.to + '?subject=' + encodeURIComponent(f.dataset.subject) + '&body=' + encodeURIComponent(body);
+  });
+</script>

@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import DevNav from '../components/DevNav.astro';
+const mats = [
+  { img: 'mat-1.jpg', w: 902, h: 800, text: '12 colors<br />4 functional buttons<br />on/off' },
+  { img: 'mat-2.png', w: 249, h: 229, text: '12 colors<br />4 functional buttons<br />on/off' },
+  { img: 'mat-3.png', w: 256, h: 241, text: 'replacable color wheel ➙ different color combination<br />pressure sensitive' },
+  { img: 'mat-4.png', w: 261, h: 241, text: '12 colors<br />pressure sensitive<br />flexible configuration' },
+];
+---
+<Base title="Mat" path="/mat">
+  <section class="page">
+    <div class="wrap">
+      <h1 class="title">Mat</h1>
+      <DevNav path="/mat" />
+      {mats.map((m, i) => (
+        <div class="item-row">
+          <img src={`/images/${m.img}`} alt={`Mat ${i + 1}`} width={m.w} height={m.h} style="width:240px" />
+          <div><h2>Mat {i + 1}</h2><p set:html={m.text} /></div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

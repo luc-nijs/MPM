@@ -1,0 +1,96 @@
+---
+import '../styles/site.css';
+import { nav, parentOf } from '../data/nav.js';
+
+interface Props { title: string; description?: string; path: string; noindex?: boolean }
+const {
+  title,
+  description = 'The Music Paint Machine is an interactive music system that allows musicians to make a digital painting by playing music on their own instrument and by moving on a coloured (dance)mat.',
+  path,
+  noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? 'https://www.musicpaintmachine.be';
+const canonical = new URL(path === '/' ? '/' : `${path}/`, site).href;
+const fullTitle = path === '/' ? 'The Music Paint Machine' : `${title} | The Music Paint Machine`;
+
+// A page in a dropdown keeps its parent highlighted.
+// Menu links end in a slash (/award/), page paths don't (/award).
+const slash = (p) => (p === '/' ? '/' : `${p}/`);
+const here = slash(parentOf[path] ?? path);
+const isOn = (item) => item.href === here || (item.children ?? []).some((c) => c.href === here);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Music Paint Machine" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/images/home-photo.jpg', site).href} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,700;0,6..12,800;1,6..12,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="brand"><a href="/">The Music Paint Machine</a></p>
+      <p class="tagline">painting with music and movement</p>
+      <nav class="menu" aria-label="Site">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-list">Menu</button>
+        <ul id="menu-list">
+          {nav.map((item) => (
+            <li class:list={[{ on: isOn(item), 'has-sub': item.children }]}>
+              <a href={item.href} aria-current={item.href === slash(path) ? 'page' : undefined}>{item.label}</a>
+              {item.children && (
+                <ul class="sub">
+                  {item.children.map((c) => (
+                    <li><a href={c.href} aria-current={c.href === here ? 'page' : undefined}>{c.label}</a></li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="paint" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <p class="ipem"><img src="/images/ipem-logo.jpg" alt="" width="40" height="40" /> This project is realized at IPEM (Ghent University)</p>
+      <p class="social">
+        <a href="https://www.facebook.com/musicpaintmachine" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://twitter.com/mpm_ipem" target="_blank" rel="noopener">Twitter</a>
+      </p>
+      <p>© Luc Nijs</p>
+    </footer>
+
+    <!-- Statcounter, as on the Weebly site (project 8541623) -->
+    <script is:inline>var sc_project = 8541623; var sc_invisible = 1; var sc_security = '9fa3c2df';</script>
+    <script is:inline async src="https://www.statcounter.com/counter/counter.js"></script>
+
+    <script is:inline>
+      // Phone menu: open and close the list.
+      (function () {
+        var b = document.querySelector('.menu-toggle');
+        if (!b) return;
+        b.addEventListener('click', function () {
+          var open = b.getAttribute('aria-expanded') === 'true';
+          b.setAttribute('aria-expanded', String(!open));
+          document.querySelector('.menu').classList.toggle('open', !open);
+        });
+      })();
+    </script>
+  </body>
+</html>

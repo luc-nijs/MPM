@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import DevNav from '../components/DevNav.astro';
+---
+<Base title="Development" path="/development">
+  <section class="page">
+    <div class="wrap">
+      <h1 class="title">Development</h1>
+      <DevNav path="/development" />
+      <h2>Spiral collaboration</h2>
+      <p class="text">The development of the Music Paint Machine is characterized by a so-called "spiral model" of collaboration between the different developers, each of them bringing in their specific knowledge, skills and experience. Musical, musicological and pedagogical premises challenged the development of the soft- and hardware, but at the same time the soft- and hardware development challenged existing and led to new didactic practices.</p>
+      <div class="cols" style="margin-top:20px">
+        <div class="person">
+          <h2>Developers</h2>
+          <h3>Dr. Luc Nijs</h3>
+          <p>original concept<br />design of pedagogical practices<br />design and execution of experiments<br /><a href="https://www.lucnijs.be" target="_blank" rel="noopener">Website</a></p>
+          <h3>Drs. Bart Moens</h3>
+          <p>soft- &amp; hardware (second and third prototype)</p>
+          <h3>Ivan Schepers</h3>
+          <p>hardware (all prototypes)</p>
+          <h3>Dr. Pieter Coussement</h3>
+          <p>software (first prototype)</p>
+        </div>
+        <div>
+          <h2>Hardware</h2>
+          <h3>Pressure Sensing Mat</h3>
+          <p>The Music Paint Machine uses an in house developed coloured pressure sensing mat. The spiral collaboration between Ivan Schepers, Bart Moens and Luc Nijs has led to different prototypes, each of them creating new possibilities.<br />Moreover, the development of the MPM-mat has inspired a series of implementations outside the MPM-research, using adpated version for research in rehabilitation (Dr. Micheline Lesaffre), performance (Drs. Esther Coorevits).</p>
+          <p><a href="/mat/">Read more</a> on the MPM-mat and its versions.</p>
+          <h3>Motion sensors</h3>
+          <p>From inertial sensors to the Kinect®: <a href="/motion-sensors/">read more</a>.</p>
+          <h2>Software</h2>
+          <p>All interfaces are programmed in Max Msp: <a href="/interface/">read more</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

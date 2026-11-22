@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import DevNav from '../components/DevNav.astro';
+---
+<Base title="Interface" path="/interface">
+  <section class="page">
+    <div class="wrap">
+      <h1 class="title">Interface</h1>
+      <DevNav path="/interface" />
+      <p class="text">All interfaces are programmed in <a href="https://cycling74.com/products/max/" target="_blank" rel="noopener">Max Msp</a>. The first interface was designed by dr. Pieter Coussement. All following interfaces were designed by drs. Bart Moens.</p>
+
+      <div class="cols" style="margin-top:20px">
+        <figure><h2>Interface 1</h2><img src="/images/interface-1.png" alt="Interface 1" width="384" height="317" /></figure>
+        <figure><h2>Interface 2</h2><img src="/images/interface-2.jpg" alt="Interface 2" width="537" height="304" /></figure>
+      </div>
+      <figure style="margin-top:24px"><img src="/images/interface-mapping.png" alt="Fixed mapping of interface 1 and 2" width="558" height="241" /><figcaption>Fixed mapping of Interface 1 &amp; 2</figcaption></figure>
+
+      <h2>Interface 3</h2>
+      <figure><img src="/images/interface-3.png" alt="Interface 3, with its parts marked A to G" width="810" height="470" /></figure>
+      <div class="text">
+        <p style="margin-top:16px">In the third prototype, major changes where made in the interface in order to allow for a dynamic and adaptable mapping:</p>
+        <ul>
+          <li>mapping are established by connecting input and output on the basis of a grid (A).</li>
+          <li>different drawing options (e.g. direct, linear, exponential) were added (B)</li>
+          <li>instruments can be chosen and the register of the instrument can be adapted (C).</li>
+          <li>different colour circles can be chosen (D).</li>
+          <li>several submodules allow adapting the range of mapped values by setting minima and maxima of values to be measured (e.g. only send values when above or below a certain value) or of mapped values (E).</li>
+          <li>The canvas can be split (horizontally and vertically) to allow a modelling modus. The teacher or a learner makes a painting first and a learner can try to imitate what has been painted (F, G)</li>
+          <li>A grid modus was added, allowing the introduction of measure, beats per measure. A metronome can be activated, letting the beat lines of the grid lighten up to show the beats. There is also an option to let the metronome sound.</li>
+        </ul>
+        <p>The configuration of chosen settings can be stored as a level, allowing the quick activation of certain mappings, values or visualizations (e.g. grid or not).</p>
+      </div>
+    </div>
+  </section>
+</Base>

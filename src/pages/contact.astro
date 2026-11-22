@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import MailForm from '../components/MailForm.astro';
+---
+<Base title="Contact" path="/contact">
+  <section class="page">
+    <div class="wrap">
+      <h1 class="title">Contact</h1>
+      <div class="cols">
+        <div>
+          <p class="lead">For more information, questions, remarks, …<br />please contact Luc Nijs.</p>
+          <MailForm id="contact-form" />
+        </div>
+        <div class="box demo">
+          <h2 style="margin-top:0">Would you like to use the Music Paint Machine?</h2>
+          <p>Don't hesitate and send me an email with your coordinates and a short motivation. I'll contact you soon then …</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+const cards = [
+  { href: '/good-practices/', label: 'Good practices', note: 'How the MPM is used in the classroom', c: 'var(--green)' },
+  { href: '/projects-plans/', label: 'Projects & Plans', note: 'All studies with the MPM, 2010–2016', c: 'var(--orange)' },
+  { href: '/publications/', label: 'Publications', note: 'Articles, chapters and the PhD thesis', c: 'var(--sky)' },
+  { href: '/presentations/', label: 'Presentations', note: 'Talks, demos and workshops since 2010', c: 'var(--red)' },
+  { href: '/mpm-dalcroze/', label: 'MPM & Dalcroze', note: 'The Music Paint Machine and the Dalcroze approach', c: 'var(--violet)' },
+  { href: '/phd-synopsis/', label: 'PhD Project Synopsis', note: 'Summary in English and Dutch', c: 'var(--yellow)' },
+  { href: '/poster/', label: 'Poster', note: 'The MPM on one page', c: 'var(--ink-blue)' },
+  { href: '/music-performance-movement/', label: 'Music Performance & Movement', note: 'Videos from the DKO121212 lecture', c: 'var(--green)' },
+];
+---
+<Base title="More info" path="/more-info">
+  <section class="page">
+    <div class="wrap">
+      <h1 class="title">More info</h1>
+      <div class="text lead">
+        <p>The Music Paint Machine is primarily an educational application that aims to contribute to an <b>embodied understanding</b> of music and to the development of musical creativity. The core of playing with the Music Paint Machine is the <b>personal experience</b> of its users. Immersed in playing with musical parameters, body movements and visualizations, they are invited to explore the possibilities of the musical instrument and to experiment with body, musical instrument and music. Accordingly, the emphasis no longer centers on cognitive control, but on the physical, auditory and visual experience of the musical parameters.</p>
+        <p>The Music Paint Machine goes beyond the mere encouragement to explore and experiment. Through deliberate learning modules this application also contributes to the development of technical-instrumental and musical-artistic skills. After all, each virtual painting provides a wealth of visual information on how the musician moves and plays the musical instrument. This allows to optimize the setting of technical and musical goals, to be aware and understand one’s own skills and to further develop these skills.</p>
+      </div>
+      <nav class="cards" aria-label="More info">
+        {cards.map((k) => <a href={k.href} style={`--c:${k.c}`}>{k.label}<span>{k.note}</span></a>)}
+      </nav>
+    </div>
+  </section>
+</Base>

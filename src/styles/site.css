@@ -1,0 +1,197 @@
+/* The Music Paint Machine — restyled in the layout of project-samuse.lu:
+   white page, large Playfair Display title, coloured menu bar, Nunito Sans text.
+   Colours: an ink blue for the menu, and the colours of the MPM mat as accents. */
+
+:root {
+  --ink-blue: #2b3a8f;
+  --ink-blue-dark: #1f2b6e;
+  --red: #e94e3c;
+  --yellow: #f6b52e;
+  --green: #3fae6a;
+  --sky: #3a9ad9;
+  --violet: #8a4fbf;
+  --orange: #f07c2a;
+  --ink: #111;
+  --muted: #5d5d66;
+  --grey: #eeedf2;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'Nunito Sans', 'Avenir Next', Avenir, 'Helvetica Neue', Arial, sans-serif;
+  --page: 980px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: #fff; color: var(--ink); font: 300 16px/1.6 var(--sans); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--ink-blue); }
+b, strong { font-weight: 800; }
+h1, h2, h3 { margin: 0; font-weight: 700; }
+p { margin: 0; }
+
+.wrap { width: min(var(--page), 100% - 32px); margin-inline: auto; }
+
+/* ---------- header ---------- */
+.site-header { width: min(var(--page), 100% - 32px); margin: 0 auto; text-align: center; padding-top: 18px; }
+.brand { font: 700 64px/1.2 var(--serif); }
+.brand a { color: var(--ink); text-decoration: none; }
+.tagline { font: 700 16px/2 var(--sans); letter-spacing: .4em; text-transform: uppercase; color: var(--muted); margin: 6px 0 26px; }
+
+.menu { position: relative; background: var(--ink-blue); }
+.menu > ul { display: flex; margin: 0; padding: 0; list-style: none; }
+.menu > ul > li { position: relative; flex: 1 1 auto; }
+.menu a { display: block; color: #fff; text-decoration: none; font: 800 14px/50px var(--sans); white-space: nowrap; }
+.menu > ul > li > a:hover, .menu > ul > li.on > a { background: rgba(0, 0, 0, .2); }
+.menu .sub {
+  display: none; position: absolute; z-index: 20; left: 50%; top: 100%; transform: translateX(-50%);
+  min-width: 100%; margin: 0; padding: 0; list-style: none; background: var(--ink-blue); text-align: left;
+}
+.menu .sub a { line-height: 40px; padding: 0 18px; }
+.menu .sub a:hover, .menu .sub a[aria-current] { background: rgba(0, 0, 0, .2); }
+.menu li.has-sub:hover > .sub, .menu li.has-sub:focus-within > .sub { display: block; }
+.menu-toggle { display: none; }
+/* A strip in the colours of the mat */
+.paint { display: flex; height: 6px; }
+.paint span { flex: 1; }
+.paint span:nth-child(1) { background: var(--red); }
+.paint span:nth-child(2) { background: var(--orange); }
+.paint span:nth-child(3) { background: var(--yellow); }
+.paint span:nth-child(4) { background: var(--green); }
+.paint span:nth-child(5) { background: var(--sky); }
+.paint span:nth-child(6) { background: var(--violet); }
+
+/* ---------- footer ---------- */
+.site-footer { width: min(var(--page), 100% - 32px); margin: 50px auto 0; padding: 22px 0 26px; border-top: 1px solid #000; text-align: center; font-size: 15px; }
+.site-footer p + p { margin-top: 8px; }
+.site-footer .ipem { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.site-footer .ipem img { width: 40px; height: 40px; }
+.site-footer .social a { margin: 0 10px; font-weight: 700; text-decoration: none; }
+.site-footer .social a:hover { text-decoration: underline; }
+
+/* ---------- shared pieces ---------- */
+.page { padding: 50px 0 10px; }
+.title { font: 700 44px/1.25 var(--serif); margin-bottom: 26px; }
+.page h2 { font: 700 26px/1.3 var(--serif); margin: 34px 0 12px; }
+.page h2:first-child { margin-top: 0; }
+.page h3 { font: 800 17px/1.4 var(--sans); margin: 22px 0 6px; }
+.page p + p { margin-top: 14px; }
+.page ul { margin: 10px 0 0; padding-left: 24px; }
+.page li + li { margin-top: 4px; }
+.lead { font-size: 18px; line-height: 1.7; }
+.text { max-width: 760px; }
+.justify p { text-align: justify; }
+.muted { color: var(--muted); }
+.center { text-align: center; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 26px;
+  background: var(--ink-blue); color: #fff; text-decoration: none; font: 700 15px/1.3 var(--sans); border: 0; cursor: pointer;
+}
+.btn:hover { background: var(--ink-blue-dark); }
+.btns { display: flex; flex-wrap: wrap; gap: 14px; }
+.box { background: var(--grey); padding: 26px 30px; }
+.box + .box { margin-top: 16px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 30px 44px; align-items: start; }
+.cols.three { grid-template-columns: repeat(3, 1fr); }
+.cols.side { grid-template-columns: 300px 1fr; }
+figure { margin: 0; }
+figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; line-height: 1.45; }
+.subnav { display: flex; flex-wrap: wrap; gap: 8px; margin: -8px 0 30px; }
+.subnav a { padding: 5px 14px; border: 1px solid var(--ink-blue); text-decoration: none; font-size: 14px; font-weight: 700; }
+.subnav a:hover, .subnav a[aria-current] { background: var(--ink-blue); color: #fff; }
+
+/* ---------- home ---------- */
+.home-intro { display: grid; grid-template-columns: 420px 1fr; gap: 40px; align-items: start; }
+.home-intro .lead { margin-bottom: 24px; }
+.home-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+.home-boxes .box + .box { margin-top: 0; }
+.home-boxes h2 { font: 700 22px/1.3 var(--serif); margin: 0 0 8px; }
+.box.demo { border-top: 5px solid var(--green); }
+.box.award { border-top: 5px solid var(--yellow); }
+.world { display: flex; align-items: center; gap: 18px; margin-top: 30px; color: var(--muted); font-size: 15px; }
+.world img { width: 166px; }
+
+/* ---------- link cards (More info) ---------- */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; margin-top: 34px; }
+.cards a { display: block; padding: 20px 20px 18px; background: var(--grey); border-left: 5px solid var(--c, var(--ink-blue)); text-decoration: none; color: var(--ink); font: 700 19px/1.3 var(--serif); }
+.cards a:hover { background: #e2e0ea; }
+.cards span { display: block; margin-top: 6px; font: 300 14px/1.45 var(--sans); color: var(--muted); }
+
+/* ---------- quotes ---------- */
+.quotes blockquote { margin: 0 0 26px; padding-left: 20px; border-left: 3px solid var(--sky); font: italic 400 18px/1.6 var(--serif); }
+.quotes cite { display: block; margin-top: 4px; font: 300 14px var(--sans); font-style: normal; color: var(--muted); }
+.quotes h2 { font: 800 15px/1.4 var(--sans); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; }
+
+/* ---------- development / mats / sensors ---------- */
+.person h3 { margin-top: 18px; }
+.person h3:first-child { margin-top: 0; }
+.item-row { display: grid; grid-template-columns: 260px 1fr; gap: 30px; align-items: center; padding: 22px 0; border-top: 1px solid #ddd; }
+.item-row:first-of-type { border-top: 0; }
+.item-row h2 { margin: 0 0 8px; }
+.sensor-pics { display: flex; gap: 10px; align-items: end; }
+.sensor-pics img { height: 180px; width: auto; }
+
+/* ---------- presentations / publications (sheets) ---------- */
+.diss .group { font: 700 20px/1.4 var(--serif); border-bottom: 1px solid #d8d5dd; padding-bottom: 4px; margin: 30px 0 12px; }
+.diss .group:first-child { margin-top: 0; }
+.diss .group span { color: #888; font: 300 13px var(--sans); margin-left: 4px; }
+.diss .item { font-size: 16px; line-height: 1.5; margin-bottom: 10px; }
+#lectures .item { margin-bottom: 3px; }
+.diss .pubs .item { padding-left: 2em; text-indent: -2em; margin-bottom: 14px; }
+.diss .item a { text-decoration: none; }
+.diss .item a:hover { text-decoration: underline; }
+.diss .item.none { color: var(--muted); }
+.pb-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin: -6px 0 26px; font-size: 14px; }
+.pb-controls label { color: var(--muted); margin-right: 6px; }
+.pb-controls label.to { margin-left: 6px; }
+.pb-controls select, .pb-controls input { font: 300 14px var(--sans); color: #000; background: #fff; border: 1px solid #c9c6d0; border-radius: 0; padding: 5px 8px; }
+.pb-controls select:focus, .pb-controls input:focus { outline: 2px solid var(--ink-blue); outline-offset: -1px; }
+.pb-count { margin-left: auto; color: var(--muted); }
+
+/* ---------- pictures ---------- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.gallery a { display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--grey); }
+/* contain, not cover: several pictures are slides whose text must stay whole */
+.gallery img { width: 100%; height: 100%; object-fit: contain; transition: transform .3s; }
+.gallery a:hover img { transform: scale(1.04); }
+html:has(.lb[open]) { overflow: hidden; }
+.lb { width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 20px 60px; border: 0; background: transparent; }
+.lb[open] { display: flex; align-items: center; justify-content: center; }
+.lb::backdrop { background: rgba(10, 12, 30, .92); }
+.lb img { max-width: 100%; max-height: calc(100dvh - 40px); width: auto; }
+.lb button { position: absolute; background: none; border: 0; color: #fff; font-size: 34px; cursor: pointer; padding: 10px 16px; }
+.lb .x { top: 8px; right: 10px; }
+.lb .prev { left: 6px; top: 50%; transform: translateY(-50%); }
+.lb .next { right: 6px; top: 50%; transform: translateY(-50%); }
+
+/* ---------- videos ---------- */
+.videos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 26px 22px; margin-top: 20px; }
+.video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; display: block; }
+.video p { font-size: 15px; margin-top: 8px; line-height: 1.4; }
+
+/* ---------- forms (open the email program) ---------- */
+.mailform { width: min(520px, 100%); margin-top: 26px; }
+.mailform .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.mailform label { display: block; font-size: 14px; margin-top: 18px; }
+.mailform input, .mailform textarea {
+  width: 100%; border: 0; border-bottom: 1px solid #000; padding: 8px 0; font: 300 16px var(--sans); background: transparent; border-radius: 0;
+}
+.mailform textarea { border: 1px solid #000; min-height: 110px; padding: 8px; margin-top: 8px; resize: vertical; }
+.mailform .btn { margin-top: 24px; }
+.mailform .note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+/* ---------- phones ---------- */
+@media (max-width: 860px) {
+  .menu a { font-size: 13px; }
+}
+@media (max-width: 760px) {
+  .brand { font-size: 40px; }
+  .tagline { font-size: 12px; letter-spacing: .2em; margin-bottom: 18px; }
+  .menu-toggle { display: block; width: 100%; background: var(--ink-blue); color: #fff; border: 0; font: 800 15px/48px var(--sans); cursor: pointer; }
+  .menu > ul { display: none; flex-direction: column; }
+  .menu.open > ul { display: flex; }
+  .menu > ul > li > a { line-height: 44px; }
+  .menu .sub { display: block; position: static; transform: none; background: rgba(0, 0, 0, .15); text-align: center; }
+  .page { padding-top: 32px; }
+  .title { font-size: 32px; }
+  .home-intro, .home-boxes, .cols, .cols.three, .cols.side, .item-row, .mailform .two { grid-template-columns: 1fr; }
+  .lb { padding: 50px 0; }
+}
